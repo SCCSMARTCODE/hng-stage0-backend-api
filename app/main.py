@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
-from datetime import datetime, UTC
+from datetime import datetime, UTC, timezone
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from typing import Dict
@@ -22,7 +22,7 @@ app.add_middleware(
 def root():
     return {
           "email": os.getenv("MY_GMAIL"),
-          "current_datetime": datetime.now(UTC).isoformat(),
+          "current_datetime": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
           "github_url": os.getenv("PROJECT_GITHUB_URL")
         }
 
